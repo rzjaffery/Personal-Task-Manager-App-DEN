@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_add" android:title="➕ Add Task" />
+    <item android:id="@+id/nav_pending" android:title="🕒 Pending Tasks" />
+    <item android:id="@+id/nav_completed" android:title="✅ Completed Tasks" />
+    <item android:id="@+id/nav_edit" android:title="✏️ Edit Task" />
+    <item android:id="@+id/nav_exit" android:title="🚪 Exit" />
+</menu>
