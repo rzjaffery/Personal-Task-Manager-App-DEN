@@ -47,8 +47,10 @@ public class TaskListActivity extends AppCompatActivity {
             if (id == R.id.nav_add) {
                 startActivity(new Intent(this, AddEditTaskActivity.class));
             } else if (id == R.id.nav_pending) {
+                startActivity(new Intent(this, PendingTaskActivity.class));
                 Toast.makeText(this, "Showing Pending Tasks", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_completed) {
+                startActivity(new Intent(this, CompletedTaskActivity.class));
                 Toast.makeText(this, "Showing Completed Tasks", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_edit) {
                 Toast.makeText(this, "Edit functionality coming soon!", Toast.LENGTH_SHORT).show();

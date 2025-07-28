@@ -12,7 +12,7 @@ import com.rzjaffery.personaltaskmanagerapp.viewmodel.TaskViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompletedTasksActivity extends AppCompatActivity {
+public class CompletedTaskActivity extends AppCompatActivity {
     private TaskViewModel taskViewModel;
     private TaskAdapter adapter;
 
