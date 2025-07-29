@@ -1,10 +1,10 @@
-# 📋 Personal Task Manager App
+# Personal Task Manager App
 
 The **Personal Task Manager** is a user-friendly Android app designed to help users keep track of their daily tasks. Users can add, edit, delete, and mark tasks as complete, all within a clean and modern UI. Built using **Java**, **Room Database**, **MVVM architecture**, and **Material Design**, the app ensures smooth performance and intuitive interaction.
 
 ---
 
-## 🚀 Features
+## Features
 
 - Add new tasks with title, description, date, and priority
 - Edit existing tasks (description, date, and priority)
@@ -25,7 +25,7 @@ Screenshots present in file
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 | Component           | Tech Stack                        |
 |---------------------|-----------------------------------|
@@ -39,7 +39,7 @@ Screenshots present in file
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 
 ```plaintext
 .
@@ -64,3 +64,29 @@ Screenshots present in file
 │   ├── drawable/               # Custom backgrounds
 │   ├── menu/                   # Navigation menu
 │   └── values/                 # Colors, strings, themes
+---
+
+
+```
+## How to run the file
+- Clone the repo
+- **bash git clone https://github.com/rzjaffery7/PersonalTaskManagerApp.git**
+- Open in the Android Studio
+- Build the Project
+- Ensure Android Gradle Plugin and dependencies are synced
+- set a real / AVD
+- run the app
+
+## Upcoming Features
+- Notifications and reminders for tasks
+- Task search and filtering
+- Cloud sync and backup with Firebase
+- Dark mode support
+
+## Author
+Rayyan Zafar Jaffery \
+Github: **https://github.com/rzjaffery** \
+LinkedIn: **https://www.linkedin.com/in/rayyanz7/**
+
+
+
