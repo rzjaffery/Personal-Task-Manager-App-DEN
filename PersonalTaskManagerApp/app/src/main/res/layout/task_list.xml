@@ -8,43 +8,49 @@
     android:background="@color/blue_1"
     tools:context=".ui.TaskListActivity">
 
-    <!-- Main Content -->
-    <RelativeLayout
+    <!-- Main Content Area -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <!-- AppBar with Toolbar -->
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue_3"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:title="Task Manager"
-            app:titleTextColor="@color/blue_5"/>
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/blue_3"
+                app:title="@string/app_name"
+                app:titleTextColor="@color/blue_5" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="80dp"
+            android:layout_marginTop="?attr/actionBarSize"
             android:padding="16dp"
-            android:layout_above="@+id/button_add"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <!-- Add Button -->
+        <!-- Floating Add Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
-            android:contentDescription="Add Task"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            android:contentDescription="@string/add_task_button"
             android:src="@drawable/add_24px"
-            android:tint="@android:color/white"
-            android:backgroundTint="@color/white"/>
-    </RelativeLayout>
+            android:tint="@color/white"
+            android:backgroundTint="@color/blue_2" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
@@ -52,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         android:background="@color/blue_3"
-        app:menu="@menu/nav_menu" />
+        app:menu="@menu/nav_menu"
+        tools:ignore="VisualLintBounds" />
 </androidx.drawerlayout.widget.DrawerLayout>

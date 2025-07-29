@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_1"
-    tools:context=".ui.CompletedTaskActivity">
+    tools:context=".ui.EditTaskActivity">
 
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,41 +17,40 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:text="@string/edit_task_heading"
         android:fontFamily="@font/castoro_titling"
-        android:gravity="center"
-        android:text="@string/add_task_heading"
-        android:textColor="@color/blue_5"
-        android:textSize="24sp"
         android:textStyle="bold"
-        tools:ignore="TextSizeCheck,VisualLintOverlap" />
+        android:textColor="@color/blue_5"
+        android:gravity="center"
+        android:textSize="24sp" />
 
     <ScrollView
         android:id="@+id/addEditLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        tools:ignore="RedundantNamespace">
-
+        android:layout_below="@id/toolbar"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
             android:orientation="vertical">
 
+            <!-- Title is shown but not editable -->
             <EditText
                 android:id="@+id/edit_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:background="@drawable/edit_text_bg"
+                android:enabled="false"
                 android:hint="@string/title"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:padding="10dp"
-                android:textColor="@color/blue_5"
-                android:textColorHint="#757575"
-                tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+                android:textColor="@android:color/darker_gray"
+                android:textColorHint="@color/blue_5"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <EditText
                 android:id="@+id/edit_description"
@@ -89,18 +89,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/blue_5"
                 android:background="@drawable/spinner_bg"
-                tools:ignore="TouchTargetSizeCheck" />
-
+                android:minHeight="48dp" />
 
             <Button
                 android:id="@+id/button_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/save_task"
                 android:backgroundTint="@color/blue_2"
+                android:text="@string/update_task"
                 android:textColor="@color/blue_5"
                 tools:ignore="VisualLintButtonSize" />
         </LinearLayout>

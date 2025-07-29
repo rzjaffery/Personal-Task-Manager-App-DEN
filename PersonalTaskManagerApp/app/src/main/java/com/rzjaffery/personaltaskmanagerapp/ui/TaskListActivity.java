@@ -1,5 +1,6 @@
 package com.rzjaffery.personaltaskmanagerapp.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -19,10 +20,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.rzjaffery.personaltaskmanagerapp.R;
 import com.rzjaffery.personaltaskmanagerapp.viewmodel.TaskViewModel;
+
 public class TaskListActivity extends AppCompatActivity {
 
-    private TaskViewModel taskViewModel;
-
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class TaskListActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if (id == R.id.nav_add) {
+            if (id == R.id.nav_add_task) {
                 startActivity(new Intent(this, AddEditTaskActivity.class));
             } else if (id == R.id.nav_pending) {
                 startActivity(new Intent(this, PendingTaskActivity.class));
@@ -52,8 +53,6 @@ public class TaskListActivity extends AppCompatActivity {
             } else if (id == R.id.nav_completed) {
                 startActivity(new Intent(this, CompletedTaskActivity.class));
                 Toast.makeText(this, "Showing Completed Tasks", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_edit) {
-                Toast.makeText(this, "Edit functionality coming soon!", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_exit) {
                 finishAffinity(); // Close the app
             }
@@ -65,7 +64,7 @@ public class TaskListActivity extends AppCompatActivity {
         FloatingActionButton buttonAdd = findViewById(R.id.button_add);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-        taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
+        TaskViewModel taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
         final TaskAdapter adapter = new TaskAdapter(taskViewModel);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -80,17 +79,9 @@ public class TaskListActivity extends AppCompatActivity {
             Intent intent = new Intent(TaskListActivity.this, AddEditTaskActivity.class);
             startActivity(intent);
         });
+        taskViewModel.getPendingTasks().observe(this, adapter::setTasks);
 
-        adapter.setOnItemClickListener(task -> {
-            Intent intent = new Intent(TaskListActivity.this, AddEditTaskActivity.class);
-            intent.putExtra("task_id", task.getId());
-            intent.putExtra("title", task.getTitle());
-            intent.putExtra("description", task.getDescription());
-            intent.putExtra("date", task.getDate());
-            intent.putExtra("priority", task.getPriority());
-            intent.putExtra("isCompleted", task.isCompleted());
-            startActivity(intent);
-        });
+
     }
 
 }

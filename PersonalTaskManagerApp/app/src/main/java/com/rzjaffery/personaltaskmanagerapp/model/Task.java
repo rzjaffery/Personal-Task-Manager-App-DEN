@@ -4,6 +4,9 @@ package com.rzjaffery.personaltaskmanagerapp.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.rzjaffery.personaltaskmanagerapp.db.Converters;
 
 import java.util.Date;
 
@@ -13,9 +16,11 @@ public class Task {
     private int id;
 
     private String title;
-    private String description;
+    private final String description;
+    private final String priority;
+
+    @TypeConverters({Converters.class})
     private Date date;
-    private String priority;
 
     @ColumnInfo(name = "is_completed")
     private boolean isCompleted;
@@ -52,10 +57,6 @@ public class Task {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -66,10 +67,6 @@ public class Task {
 
     public String getPriority() {
         return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
     }
 
     public boolean isCompleted() {

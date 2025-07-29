@@ -48,6 +48,12 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
 
+    // Optional: for LiveData support
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+
+    // Optional: for coroutines (if using later)
+    implementation ("androidx.room:room-ktx:2.6.1")
+
     // Room
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")

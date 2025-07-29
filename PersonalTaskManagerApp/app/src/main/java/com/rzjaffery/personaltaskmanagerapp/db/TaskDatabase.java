@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.rzjaffery.personaltaskmanagerapp.model.Task;
-@Database(entities = {Task.class}, version = 3) // increment version!
+@Database(entities = {Task.class}, version = 4) // increment version!
 @TypeConverters({Converters.class})
 public abstract class TaskDatabase extends RoomDatabase {
     private static TaskDatabase instance;

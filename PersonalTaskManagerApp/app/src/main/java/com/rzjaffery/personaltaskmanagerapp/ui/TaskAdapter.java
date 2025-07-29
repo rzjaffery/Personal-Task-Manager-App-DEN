@@ -2,6 +2,9 @@
 package com.rzjaffery.personaltaskmanagerapp.ui;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -29,7 +32,6 @@ import java.util.List;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
     private List<Task> tasks = new ArrayList<>();
-    private OnItemClickListener listener;
     private TaskViewModel taskViewModel;
 
     public TaskAdapter(TaskViewModel taskViewModel) {
@@ -52,10 +54,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
         Task currentTask = tasks.get(position);
         holder.textViewTitle.setText(currentTask.getTitle());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        holder.textViewDescription.setText(currentTask.getDescription());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = sdf.format(currentTask.getDate());
         holder.textViewDate.setText(formattedDate);
-
         holder.textViewPriority.setText(currentTask.getPriority());
     }
 
@@ -64,6 +66,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         return tasks.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
@@ -90,9 +93,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
                 if (direction == ItemTouchHelper.RIGHT) {
                     task.setCompleted(true);
                     taskViewModel.update(task);
-                    tasks.remove(position);
-                    notifyItemRemoved(position);
-
                     Toast.makeText(taskViewModel.getApplication().getApplicationContext(),
                             "Task Marked as Complete",
                             Toast.LENGTH_SHORT).show();
@@ -135,27 +135,37 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         private final TextView textViewTitle;
         private final TextView textViewDate;
         private final TextView textViewPriority;
+        private final TextView textViewDescription;
 
         public TaskHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_title);
             textViewDate = itemView.findViewById(R.id.text_date);
             textViewPriority = itemView.findViewById(R.id.text_priority);
+            textViewDescription = itemView.findViewById(R.id.text_description);
+
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
-                if (listener != null && position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(tasks.get(position));
+                if (position != RecyclerView.NO_POSITION) {
+                    Task selectedTask = tasks.get(position);
+                    Context context = itemView.getContext();
+
+                    Intent intent = new Intent(context, EditTaskActivity.class);
+                    intent.putExtra("task_id", selectedTask.getId());
+                    intent.putExtra("title", selectedTask.getTitle());
+                    intent.putExtra("description", selectedTask.getDescription());
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    String formattedDate = sdf.format(selectedTask.getDate());
+                    intent.putExtra("date", formattedDate);
+
+                    intent.putExtra("priority", selectedTask.getPriority());
+                    context.startActivity(intent);
                 }
             });
+
+
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(Task task);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
     }
 }
